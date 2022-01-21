@@ -12,8 +12,8 @@ const CssTextField = styled(TextField)({
 });
 
 const App = () => {
-  const [date, setdate] = useState();
-  const [time, settime] = useState('');
+  const [date, setdate] = useState(getCurrentDate('-'));
+  const [time, settime] = useState(getCurrentTime());
   const [notes, setnotes] = useState('');
   const [num, setNum] = useState(0);
   let happyemoji = 'https://img.icons8.com/emoji/2x/smiling-face-with-halo.png';
@@ -21,10 +21,29 @@ const App = () => {
   let lovelyemoji =
     'https://img.icons8.com/emoji/2x/smiling-face-with-heart-eyes.png';
   const [emoji, setemoji] = useState('');
-  console.log(emoji);
-
   const [array, setarray] = useState([]);
   const [editid, setEditid] = useState(0);
+
+  function getCurrentDate(separator = '') {
+    let myCurrentDate = new Date();
+    let date = myCurrentDate.getDate();
+    let month = myCurrentDate.getMonth() + 1;
+    let year = myCurrentDate.getFullYear();
+
+    return `${year}${separator}${
+      month < 10 ? `0${month}` : `${month}`
+    }${separator}${date}`;
+  }
+  function getCurrentTime() {
+    let time = new Date();
+    let newtime = time.toLocaleString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: false,
+    });
+
+    return newtime;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,8 +79,8 @@ const App = () => {
       setNum(num + 1);
       addTask(notes, date, time, num, emoji);
       setnotes('');
-      setdate('');
-      settime('');
+      setdate(getCurrentDate('-'));
+      settime(getCurrentTime());
       setemoji('');
     }
   };
@@ -96,8 +115,8 @@ const App = () => {
   };
 
   return (
-    <div>
-      <div>
+    <div className="all">
+      <div className="one">
         <fieldset className="input">
           <legend>
             <h1>Diary Application</h1>
@@ -109,30 +128,14 @@ const App = () => {
               <input
                 type="date"
                 value={date}
-                // required
                 onChange={(e) => setdate(e.target.value)}
               />
-              {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DesktopDatePicker
-                  value={date}
-                  onChange={(e) => {
-                    setdate(e);
-                  }}
-                  renderInput={({ inputRef, inputProps, InputProps }) => (
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                      <input ref={inputRef} {...inputProps} />
-                      {InputProps?.endAdornment}
-                    </Box>
-                  )}
-                />
-              </LocalizationProvider> */}
               <br />
               <br />
               <label>Time : </label>
               <input
                 type="time"
                 value={time}
-                // required
                 onChange={(e) => settime(e.target.value)}
               />
               <br />
@@ -200,27 +203,28 @@ const App = () => {
             </form>
           </div>
         </fieldset>
+      </div>
 
+      <div className="two">
         <fieldset className="notes">
           <legend>
             <h3>Notes:</h3>
           </legend>
           {array.length
             ? array.map((map, index) => (
-                <>
-                  <span key={index}>
-                    <div style={{ fontSize: 35 }}>
-                      {map.emoji}&nbsp;&nbsp; {map.notes}
-                      &nbsp;&nbsp;
-                      <EditSharpIcon onClick={() => handleEdit(map.id)} />
-                      &nbsp;&nbsp;
-                      <DeleteForeverIcon onClick={() => handleDelete(map.id)} />
-                      <br />
-                    </div>
-                    &nbsp;&nbsp; {map.date} - {map.time}
-                  </span>
-                  <br />
-                </>
+                <li className='li'>
+                  <div style={{ fontSize: 35 }} >
+                   <div className="task"><div className='emojiclass' > {map.emoji}</div>&nbsp;&nbsp; {map.notes}
+                    
+                    &nbsp;&nbsp;</div>
+                    <EditSharpIcon onClick={() => handleEdit(map.id)} />
+                    &nbsp;&nbsp;
+                    <DeleteForeverIcon onClick={() => handleDelete(map.id)} />
+                    
+                  </div>
+                 <dd> &nbsp;&nbsp; &nbsp;&nbsp;
+                  {map.date} - {map.time}</dd>
+                </li>
               ))
             : 'Add Notes to show ...'}
         </fieldset>
