@@ -1,0 +1,30 @@
+h1,
+p {
+  font-family: Lato;
+}
+div {
+  text-align: left;
+}
+.text {
+  background-color: white;
+  width: 260px;
+  padding: 10px;
+  border-radius: 3%;
+}
+fieldset {
+  padding-left: 15%;
+  padding-right: 15%;
+  margin-left: 25%;
+  margin-right: 25%;
+  border-radius: 3%;
+  /* background-color: coral; */
+  /* //width: 50%; */
+}
+fieldset.notes {
+  background-color: yellow;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-left: 25%;
+  margin-right: 25%;
+  border-radius: 3%;
+}
