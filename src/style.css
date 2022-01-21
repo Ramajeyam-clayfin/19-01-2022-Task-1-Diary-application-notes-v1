@@ -30,4 +30,8 @@ fieldset.notes {
   border-radius: 3%;
 }
 
-
+/* Emoji part */
+.emoji {
+  width: 150px;
+  margin: auto;
+}

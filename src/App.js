@@ -5,10 +5,6 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditSharpIcon from '@mui/icons-material/EditSharp';
-import Box from '@mui/material/Box';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DesktopDatePicker from '@mui/lab/DatePicker';
 import './style.css';
 
 const CssTextField = styled(TextField)({
@@ -190,15 +186,6 @@ const App = () => {
                 />
                 <br />
               </div>
-              {/* <button   value="happy" >
-                
-              </button>
-              <button  value="sad">
-                {sad}
-              </button>
-              <button  value="lovely">
-                {lovely}
-              </button> */}
               <br /> <br />
               <LoadingButton
                 startIcon={<SaveIcon />}
