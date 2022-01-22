@@ -127,6 +127,7 @@ const App = () => {
               <label>Date : </label>
               <input
                 type="date"
+                classname="dateinput"
                 value={date}
                 onChange={(e) => setdate(e.target.value)}
               />
@@ -135,6 +136,7 @@ const App = () => {
               <label>Time : </label>
               <input
                 type="time"
+                className="timeinput"
                 value={time}
                 onChange={(e) => settime(e.target.value)}
               />
@@ -157,6 +159,7 @@ const App = () => {
               <div className="emoji">
                 <input
                   type="image"
+                  className="emojiinput"
                   src={happyemoji}
                   width="35px"
                   value="happy"
@@ -168,6 +171,7 @@ const App = () => {
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <input
                   type="image"
+                  className="emojiinput"
                   src={sademoji}
                   width="35px"
                   value="sad"
@@ -179,6 +183,7 @@ const App = () => {
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <input
                   type="image"
+                  className="emojiinput"
                   src={lovelyemoji}
                   width="35px"
                   value="lovely"
@@ -212,19 +217,29 @@ const App = () => {
           </legend>
           {array.length
             ? array.map((map, index) => (
-                <li className='li'>
-                  <div style={{ fontSize: 35 }} >
-                   <div className="task"><div className='emojiclass' > {map.emoji}</div>&nbsp;&nbsp; {map.notes}
-                    
-                    &nbsp;&nbsp;</div>
-                    <EditSharpIcon onClick={() => handleEdit(map.id)} />
-                    &nbsp;&nbsp;
-                    <DeleteForeverIcon onClick={() => handleDelete(map.id)} />
-                    
-                  </div>
-                 <dd> &nbsp;&nbsp; &nbsp;&nbsp;
-                  {map.date} - {map.time}</dd>
-                </li>
+                <div>
+                  <li className="li">
+                    <div style={{ fontSize: 25 }}>
+                      <div className="task">
+                        <div className="emojiclass"> {map.emoji}</div>
+                        &nbsp;&nbsp; {map.notes}
+                        &nbsp;&nbsp;
+                      </div>
+                      <EditSharpIcon
+                        className="editbtn"
+                        onClick={() => handleEdit(map.id)}
+                      />
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <DeleteForeverIcon
+                        className="delbtn"
+                        onClick={() => handleDelete(map.id)}
+                      />
+                    </div>
+                  </li>
+                  <p className="datetime">
+                    {map.date} - {map.time}
+                  </p>
+                </div>
               ))
             : 'Add Notes to show ...'}
         </fieldset>
