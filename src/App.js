@@ -79,27 +79,21 @@ const App = () => {
     }
 
     if (notes !== '') {
-      
-
       setNum(num + 1);
       addTask(notes, date, time, num, emoji);
       setnotes('');
       setdate(getCurrentDate('-'));
       settime(getCurrentTime());
       setemoji('');
-      if(emoji == '😇'){
-        return setHappycount(happycount + 1)
-    
-       }else if(emoji == '😓'){
-         return setSadcount(sadcount + 1)
-       }else if(emoji == '😍'){
-         return setLovelycount(lovelycount + 1)
-       }
+      if (emoji == '😇') {
+        return setHappycount(happycount + 1);
+      } else if (emoji == '😓') {
+        return setSadcount(sadcount + 1);
+      } else if (emoji == '😍') {
+        return setLovelycount(lovelycount + 1);
+      }
     }
   };
-
-  
-
 
   const addTask = (notes, date, time, num, emoji) => {
     let d = date;
@@ -123,6 +117,18 @@ const App = () => {
   const handleDelete = (id) => {
     const delnotes = array.filter((to) => to.id !== id);
     setarray([...delnotes]);
+
+    array.filter((to) => {
+      if (to.id === id) {
+        if (to.emoji == '😇') {
+          return setHappycount(happycount - 1);
+        } else if (to.emoji == '😓') {
+          return setSadcount(sadcount - 1);
+        } else if (to.emoji == '😍') {
+          return setLovelycount(lovelycount - 1);
+        }
+      }
+    });
   };
   const handleEdit = (id) => {
     const editnotes = array.find((i) => i.id === id);
@@ -231,15 +237,14 @@ const App = () => {
           <legend>
             <h3>Notes:</h3>
           </legend>
-          <p className='emojicount'>
-                  {'😇'}{' '}{happycount}&nbsp;&nbsp;
-                  {'😓'}{' '}{sadcount}&nbsp;&nbsp;
-                  {'😍'}{' '}{lovelycount}&nbsp;&nbsp;
-                  </p>
+          <p className="emojicount">
+            {'😇'} {happycount}&nbsp;&nbsp;
+            {'😓'} {sadcount}&nbsp;&nbsp;
+            {'😍'} {lovelycount}&nbsp;&nbsp;
+          </p>
           {array.length
             ? array.map((map, index) => (
                 <div>
-                 
                   <li className="li">
                     <div style={{ fontSize: 25 }}>
                       <div className="task">
