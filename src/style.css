@@ -25,7 +25,7 @@ div {
 /* input Inner part */
 .text {
   background-color: white;
-  /* width: ; */
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.6), 0 6px 20px 0 rgba(0, 0, 0, 0.6);
   margin: auto;
   padding: 10%;
   border-radius: 3%;
@@ -47,6 +47,7 @@ fieldset.notes {
   margin: auto;
   border-radius: 3%;
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.6), 0 6px 20px 0 rgba(0, 0, 0, 0.6);
+  padding-top: 0%;
 }
 
 /* Emoji part */
@@ -54,6 +55,10 @@ fieldset.notes {
   display: inline-block;
   width: 230px;
   margin: auto;
+}
+.emojicount {
+  text-align: end;
+  margin-left: 0%;
 }
 
 .li {
@@ -85,6 +90,7 @@ fieldset.notes {
 .delbtn {
   cursor: pointer;
 }
+
 .emojiinput:hover {
   border-radius: 50%;
   box-shadow: 0px 2px 26px 1px rgba(0, 0, 0, 0.5),

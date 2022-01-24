@@ -21,6 +21,9 @@ const App = () => {
   let lovelyemoji =
     'https://img.icons8.com/emoji/2x/smiling-face-with-heart-eyes.png';
   const [emoji, setemoji] = useState('');
+  const [happycount, setHappycount] = useState(0);
+  const [sadcount, setSadcount] = useState(0);
+  const [lovelycount, setLovelycount] = useState(0);
   const [array, setarray] = useState([]);
   const [editid, setEditid] = useState(0);
 
@@ -76,14 +79,27 @@ const App = () => {
     }
 
     if (notes !== '') {
+      
+
       setNum(num + 1);
       addTask(notes, date, time, num, emoji);
       setnotes('');
       setdate(getCurrentDate('-'));
       settime(getCurrentTime());
       setemoji('');
+      if(emoji == '😇'){
+        return setHappycount(happycount + 1)
+    
+       }else if(emoji == '😓'){
+         return setSadcount(sadcount + 1)
+       }else if(emoji == '😍'){
+         return setLovelycount(lovelycount + 1)
+       }
     }
   };
+
+  
+
 
   const addTask = (notes, date, time, num, emoji) => {
     let d = date;
@@ -127,7 +143,7 @@ const App = () => {
               <label>Date : </label>
               <input
                 type="date"
-                classname="dateinput"
+                className="dateinput"
                 value={date}
                 onChange={(e) => setdate(e.target.value)}
               />
@@ -215,9 +231,15 @@ const App = () => {
           <legend>
             <h3>Notes:</h3>
           </legend>
+          <p className='emojicount'>
+                  {'😇'}{' '}{happycount}&nbsp;&nbsp;
+                  {'😓'}{' '}{sadcount}&nbsp;&nbsp;
+                  {'😍'}{' '}{lovelycount}&nbsp;&nbsp;
+                  </p>
           {array.length
             ? array.map((map, index) => (
                 <div>
+                 
                   <li className="li">
                     <div style={{ fontSize: 25 }}>
                       <div className="task">
