@@ -9,23 +9,23 @@ import './style.css';
 
 const CssTextField = styled(TextField)({
   backgroundColor: 'white',
-});
+}); //style for textfield
 
 const App = () => {
-  const [date, setdate] = useState(getCurrentDate('-'));
-  const [time, settime] = useState(getCurrentTime());
-  const [notes, setnotes] = useState('');
+  const [date, setdate] = useState(getCurrentDate('-')); //for Date
+  const [time, settime] = useState(getCurrentTime()); //for Time
+  const [notes, setnotes] = useState(''); //For Tasks
   const [num, setNum] = useState(0);
   let happyemoji = 'https://img.icons8.com/emoji/2x/smiling-face-with-halo.png';
   let sademoji = 'https://img.icons8.com/emoji/2x/downcast-face-with-sweat.png';
   let lovelyemoji =
     'https://img.icons8.com/emoji/2x/smiling-face-with-heart-eyes.png';
-  const [emoji, setemoji] = useState('');
+  const [emoji, setemoji] = useState(''); ///for Emoji
   const [happycount, setHappycount] = useState(0);
   const [sadcount, setSadcount] = useState(0);
   const [lovelycount, setLovelycount] = useState(0);
-  const [array, setarray] = useState([]);
-  const [editid, setEditid] = useState(0);
+  const [array, setarray] = useState([]); //Array where we push all data inside
+  const [editid, setEditid] = useState(0); //used for editing the tasks
 
   function getCurrentDate(separator = '') {
     let myCurrentDate = new Date();
@@ -36,7 +36,8 @@ const App = () => {
     return `${year}${separator}${
       month < 10 ? `0${month}` : `${month}`
     }${separator}${date}`;
-  }
+  } //get the cuurent Date and return in year-month-date format
+
   function getCurrentTime() {
     let time = new Date();
     let newtime = time.toLocaleString('en-US', {
@@ -46,32 +47,22 @@ const App = () => {
     });
 
     return newtime;
-  }
+  } // get the cuurent time and return in hour-minute
 
+  // handle the Add/update button
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); //to stop the page getting load
 
     if (editid) {
-      const editnotes = array.find((i) => i.id === editid);
-      const updatedarray = array.map((map) =>
-        map.id === editnotes.id
-          ? (map = {
-              id: map.id,
-              notes,
-              date: map.date,
-              time: map.time,
-              num: map.num,
-              emoji: map.emoji,
-            })
-          : {
-              id: map.id,
-              notes: map.notes,
-              date: map.date,
-              time: map.time,
-              num: map.num,
-              emoji: map.emoji,
-            }
-      );
+      //handle edited task to update in array
+
+      const updatedarray = array.map((obj) => {
+        if (obj.id === editid) {
+          obj = { ...obj, notes };
+        }
+        return obj;
+      });
+
       setarray(updatedarray);
       setEditid(0);
       setnotes('');
@@ -79,13 +70,15 @@ const App = () => {
     }
 
     if (notes !== '') {
+      //when notes is not empty
       setNum(num + 1);
-      addTask(notes, date, time, num, emoji);
-      setnotes('');
-      setdate(getCurrentDate('-'));
-      settime(getCurrentTime());
+      addTask(notes, date, time, num, emoji); // function call where values are pushed into array
+      setnotes(''); //empty the textarea
+      setdate(getCurrentDate('-')); //again get the current date
+      settime(getCurrentTime()); //get cuurent time
       setemoji('');
       if (emoji == '😇') {
+        //where it update the emoji count for each emoji invidually
         return setHappycount(happycount + 1);
       } else if (emoji == '😓') {
         return setSadcount(sadcount + 1);
@@ -96,29 +89,29 @@ const App = () => {
   };
 
   const addTask = (notes, date, time, num, emoji) => {
-    let d = date;
-    let t = time;
-    let a = num + 1;
-    let e = emoji;
+    //where values are moved to array
+
     const newTasks = [
       {
-        id: `${notes}-${Date.now()}`,
+        id: `${notes}-${Date.now()}`, //task_value - no. of milliseconds since Jan 1, 1970.
         notes,
-        date: d,
-        time: t,
-        num: a,
-        emoji: e,
+        date,
+        time,
+        num,
+        emoji,
       },
-      ...array,
+      ...array, //other ojects are stored in rest
     ];
-    setarray(newTasks);
+    setarray(newTasks); //using usestate inserting this newTasks into array
   };
 
   const handleDelete = (id) => {
-    const delnotes = array.filter((to) => to.id !== id);
-    setarray([...delnotes]);
+    //handle delete button
+    const delnotes = array.filter((to) => to.id !== id); // filtering the ojects using id
+    setarray([...delnotes]); //expect the oject that matches the id other ojects are inserted inside array
 
     array.filter((to) => {
+      // used to reduce the count of emoji when delete
       if (to.id === id) {
         if (to.emoji == '😇') {
           return setHappycount(happycount - 1);
@@ -130,10 +123,12 @@ const App = () => {
       }
     });
   };
+
   const handleEdit = (id) => {
-    const editnotes = array.find((i) => i.id === id);
-    setnotes(editnotes.notes);
-    setEditid(id);
+    //handles edit
+    const editnotes = array.find((i) => i.id === id); //find the object using id
+    setnotes(editnotes.notes); //updating the task value so it goes to the textarea again for edit with previous value
+    setEditid(id); //passing the id so while submiting it update the array
   };
 
   return (
