@@ -174,41 +174,47 @@ const App = () => {
               <br />
               <br />
               <div className="emoji">
-                <input
-                  type="image"
-                  className="emojiinput"
-                  src={happyemoji}
-                  width="35px"
-                  value="happy"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setemoji('😇');
-                  }}
-                />
+                <abbr title="Happy">
+                  <input
+                    type="image"
+                    className="emojiinput"
+                    src={happyemoji}
+                    width="35px"
+                    value="happy"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setemoji('😇');
+                    }}
+                  />
+                </abbr>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <input
-                  type="image"
-                  className="emojiinput"
-                  src={sademoji}
-                  width="35px"
-                  value="sad"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setemoji('😓');
-                  }}
-                />
+                <abbr title="Sad">
+                  <input
+                    type="image"
+                    className="emojiinput"
+                    src={sademoji}
+                    width="35px"
+                    value="sad"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setemoji('😓');
+                    }}
+                  />
+                </abbr>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <input
-                  type="image"
-                  className="emojiinput"
-                  src={lovelyemoji}
-                  width="35px"
-                  value="lovely"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setemoji('😍');
-                  }}
-                />
+                <abbr title="Lovely">
+                  <input
+                    type="image"
+                    className="emojiinput"
+                    src={lovelyemoji}
+                    width="35px"
+                    value="lovely"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setemoji('😍');
+                    }}
+                  />
+                </abbr>
                 <br />
               </div>
               <br /> <br />
